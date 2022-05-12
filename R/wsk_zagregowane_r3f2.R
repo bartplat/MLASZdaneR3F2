@@ -188,20 +188,36 @@ zaw_licz_WT = function(x) {
 #' @importFrom dplyr %>%
 #' @export
 praca_zarobkowa = function(x) {
-  nka = sum(x$SZ5_3_1 %in% c(1:3, 7) |
-              x$SZ5_3_2 %in% c(1:3, 7) |
-              x$SZ5_3_3 %in% c(1:3, 7) |
-              x$SZ5_3_4 %in% c(1:3, 7), na.rm = TRUE)
+  nka = sum(x$SZ5_2_1 %in% c(1:3, 6:9) |
+              x$SZ5_2_2 %in% c(1:3, 6:9) |
+              x$SZ5_2_3 %in% c(1:3, 6:9) |
+              x$SZ5_2_4 %in% c(1:3, 6:9) |
+              x$SZ5_3_1 %in% c(1:3, 6:9) |
+              x$SZ5_3_2 %in% c(1:3, 6:9) |
+              x$SZ5_3_3 %in% c(1:3, 6:9) |
+              x$SZ5_3_4 %in% c(1:3, 6:9) |
+              x$SZ5_4_1 %in% c(1:3, 6:9) |
+              x$SZ5_4_2 %in% c(1:3, 6:9) |
+              x$SZ5_4_3 %in% c(1:3, 6:9) |
+              x$SZ5_4_4 %in% c(1:3, 6:9), na.rm = TRUE)
 
   list(n = nka,
-       ods_ever = sum(x$SZ5_3_1 %in% 1 |
+       ods_ever = sum(x$SZ5_2_1 %in% 1 |
+                        x$SZ5_2_2 %in% 1 |
+                        x$SZ5_2_3 %in% 1 |
+                        x$SZ5_2_4 %in% 1 |
+                        x$SZ5_3_1 %in% 1 |
                         x$SZ5_3_2 %in% 1 |
                         x$SZ5_3_3 %in% 1 |
-                        x$SZ5_3_4 %in% 1, na.rm = TRUE) / nka,
-       ods_07 = sum(x$SZ5_3_1 %in% 1, na.rm = TRUE) / nka,
-       ods_08 = sum(x$SZ5_3_2 %in% 1, na.rm = TRUE) / nka,
-       ods_09 = sum(x$SZ5_3_3 %in% 1, na.rm = TRUE) / nka,
-       ods_10 = sum(x$SZ5_3_4 %in% 1, na.rm = TRUE) / nka) %>%
+                        x$SZ5_3_4 %in% 1 |
+                        x$SZ5_4_1 %in% 1 |
+                        x$SZ5_4_2 %in% 1 |
+                        x$SZ5_4_3 %in% 1 |
+                        x$SZ5_4_4 %in% 1, na.rm = TRUE) / nka,
+       ods_07 = sum(x$SZ5_2_1 %in% 1 | x$SZ5_3_1 %in% 1 | x$SZ5_4_1 %in% 1, na.rm = TRUE) / nka,
+       ods_08 = sum(x$SZ5_2_2 %in% 1 | x$SZ5_3_2 %in% 1 | x$SZ5_4_2 %in% 1, na.rm = TRUE) / nka,
+       ods_09 = sum(x$SZ5_2_3 %in% 1 | x$SZ5_3_3 %in% 1 | x$SZ5_4_3 %in% 1, na.rm = TRUE) / nka,
+       ods_10 = sum(x$SZ5_2_4 %in% 1 | x$SZ5_3_4 %in% 1 | x$SZ5_4_4 %in% 1, na.rm = TRUE) / nka) %>%
     return()
 }
 #' @title Obliczanie wskaznikow dla R3 F2 na poziomie zagregowanym
@@ -214,21 +230,37 @@ praca_zarobkowa = function(x) {
 #' @export
 praca_zarobkowa_WT = function(x) {
   nka = sum(as.numeric(
-    x$SZ5_3_1 %in% c(1:3, 7) |
-      x$SZ5_3_2 %in% c(1:3, 7) |
-      x$SZ5_3_3 %in% c(1:3, 7) |
-      x$SZ5_3_4 %in% c(1:3, 7)) * x$waga, na.rm = TRUE)
+    x$SZ5_2_1 %in% c(1:3, 6:9) |
+      x$SZ5_2_2 %in% c(1:3, 6:9) |
+      x$SZ5_2_3 %in% c(1:3, 6:9) |
+      x$SZ5_2_4 %in% c(1:3, 6:9) |
+      x$SZ5_3_1 %in% c(1:3, 6:9) |
+      x$SZ5_3_2 %in% c(1:3, 6:9) |
+      x$SZ5_3_3 %in% c(1:3, 6:9) |
+      x$SZ5_3_4 %in% c(1:3, 6:9) |
+      x$SZ5_4_1 %in% c(1:3, 6:9) |
+      x$SZ5_4_2 %in% c(1:3, 6:9) |
+      x$SZ5_4_3 %in% c(1:3, 6:9) |
+      x$SZ5_4_4 %in% c(1:3, 6:9)) * x$waga, na.rm = TRUE)
 
   list(n = nka,
        ods_ever = sum(as.numeric(
-         x$SZ5_3_1 %in% 1 |
+         x$SZ5_2_1 %in% 1 |
+           x$SZ5_2_2 %in% 1 |
+           x$SZ5_2_3 %in% 1 |
+           x$SZ5_2_4 %in% 1 |
+           x$SZ5_3_1 %in% 1 |
            x$SZ5_3_2 %in% 1 |
            x$SZ5_3_3 %in% 1 |
-           x$SZ5_3_4 %in% 1) * x$waga, na.rm = TRUE) / nka,
-       ods_07 = sum(as.numeric(x$SZ5_3_1 %in% 1) * x$waga, na.rm = TRUE) / nka,
-       ods_08 = sum(as.numeric(x$SZ5_3_2 %in% 1) * x$waga, na.rm = TRUE) / nka,
-       ods_09 = sum(as.numeric(x$SZ5_3_3 %in% 1) * x$waga, na.rm = TRUE) / nka,
-       ods_10 = sum(as.numeric(x$SZ5_3_4 %in% 1) * x$waga, na.rm = TRUE) / nka) %>%
+           x$SZ5_3_4 %in% 1 |
+           x$SZ5_4_1 %in% 1 |
+           x$SZ5_4_2 %in% 1 |
+           x$SZ5_4_3 %in% 1 |
+           x$SZ5_4_4 %in% 1) * x$waga, na.rm = TRUE) / nka,
+       ods_07 = sum(as.numeric(x$SZ5_2_1 %in% 1 | x$SZ5_3_1 %in% 1 | x$SZ5_4_1 %in% 1) * x$waga, na.rm = TRUE) / nka,
+       ods_08 = sum(as.numeric(x$SZ5_2_2 %in% 1 | x$SZ5_3_2 %in% 1 | x$SZ5_4_2 %in% 1) * x$waga, na.rm = TRUE) / nka,
+       ods_09 = sum(as.numeric(x$SZ5_2_3 %in% 1 | x$SZ5_3_3 %in% 1 | x$SZ5_4_3 %in% 1) * x$waga, na.rm = TRUE) / nka,
+       ods_10 = sum(as.numeric(x$SZ5_2_4 %in% 1 | x$SZ5_3_4 %in% 1 | x$SZ5_4_4 %in% 1) * x$waga, na.rm = TRUE) / nka) %>%
     return()
 }
 #' @title Obliczanie wskaznikow dla R3 F2 na poziomie zagregowanym
@@ -304,54 +336,46 @@ neet = function(x) {
               x$SZ5_1_4 %in% c(1:3, 7), na.rm = TRUE)
 
   list(n = nka,
-       n_neet = sum(x$SZ5_1_1 %in% 2 &
+       ods_all = sum((x$SZ5_1_1 %in% 2 &
                       x$SZ5_1_2 %in% 2 &
                       x$SZ5_1_3 %in% 2 &
-                      x$SZ5_1_4 %in% 2 &
-                      x$SZ5_2_1 %in% 2 &
+                      x$SZ5_1_4 %in% 2) &
+                      (x$SZ5_2_1 %in% 2 &
                       x$SZ5_2_2 %in% 2 &
                       x$SZ5_2_3 %in% 2 &
-                      x$SZ5_2_4 %in% 2 &
-                      x$SZ5_3_1 %in% 2 &
+                      x$SZ5_2_4 %in% 2) &
+                      (x$SZ5_3_1 %in% 2 &
                       x$SZ5_3_2 %in% 2 &
                       x$SZ5_3_3 %in% 2 &
-                      x$SZ5_3_4 %in% 2 &
-                      x$SZ5_4_1 %in% 2 &
+                      x$SZ5_3_4 %in% 2) &
+                      (x$SZ5_4_1 %in% 2 &
                       x$SZ5_4_2 %in% 2 &
                       x$SZ5_4_3 %in% 2 &
-                      x$SZ5_4_4 %in% 2, na.rm = TRUE),
-       ods_ever = sum(x$SZ5_1_1 %in% 2 &
-                        x$SZ5_1_2 %in% 2 &
-                        x$SZ5_1_3 %in% 2 &
-                        x$SZ5_1_4 %in% 2 &
-                        x$SZ5_2_1 %in% 2 &
-                        x$SZ5_2_2 %in% 2 &
-                        x$SZ5_2_3 %in% 2 &
-                        x$SZ5_2_4 %in% 2 &
-                        x$SZ5_3_1 %in% 2 &
-                        x$SZ5_3_2 %in% 2 &
-                        x$SZ5_3_3 %in% 2 &
-                        x$SZ5_3_4 %in% 2 &
-                        x$SZ5_4_1 %in% 2 &
-                        x$SZ5_4_2 %in% 2 &
-                        x$SZ5_4_3 %in% 2 &
-                        x$SZ5_4_4 %in% 2, na.rm = TRUE) / nka,
+                      x$SZ5_4_4 %in% 2) &
+                      (x$SZ5_5_1 %in% 2 &
+                      x$SZ5_5_2 %in% 2 &
+                      x$SZ5_5_3 %in% 2 &
+                      x$SZ5_5_4 %in% 2), na.rm = TRUE) / nka,
        ods_07 = sum(x$SZ5_1_1 %in% 2 &
                       x$SZ5_2_1 %in% 2 &
                       x$SZ5_3_1 %in% 2 &
-                      x$SZ5_4_1 %in% 2, na.rm = TRUE) / nka,
+                      x$SZ5_4_1 %in% 2 &
+                      x$SZ5_5_1 %in% 2, na.rm = TRUE) / nka,
        ods_08 = sum(x$SZ5_1_2 %in% 2 &
                       x$SZ5_2_2 %in% 2 &
                       x$SZ5_3_2 %in% 2 &
-                      x$SZ5_4_2 %in% 2, na.rm = TRUE) / nka,
+                      x$SZ5_4_2 %in% 2 &
+                      x$SZ5_5_2 %in% 2, na.rm = TRUE) / nka,
        ods_09 = sum(x$SZ5_1_3 %in% 2 &
                       x$SZ5_2_3 %in% 2 &
                       x$SZ5_3_3 %in% 2 &
-                      x$SZ5_4_3 %in% 2, na.rm = TRUE) / nka,
+                      x$SZ5_4_3 %in% 2 &
+                      x$SZ5_5_3 %in% 2, na.rm = TRUE) / nka,
        ods_10 = sum(x$SZ5_1_4 %in% 2 &
                       x$SZ5_2_4 %in% 2 &
                       x$SZ5_3_4 %in% 2 &
-                      x$SZ5_4_4 %in% 2, na.rm = TRUE) / nka) %>%
+                      x$SZ5_4_4 %in% 2 &
+                      x$SZ5_5_4 %in% 2, na.rm = TRUE) / nka) %>%
     return()
 }
 #' @title Obliczanie wskaznikow dla R3 F2 na poziomie zagregowanym
@@ -375,111 +399,100 @@ neet_WT = function(x) {
               x$SZ5_1_4 %in% c(1:3, 7)) * x$waga, na.rm = TRUE)
 
   list(n = nka,
-       n_neet = sum(as.numeric(
-         x$SZ5_1_1 %in% 2 &
-           x$SZ5_1_2 %in% 2 &
-           x$SZ5_1_3 %in% 2 &
-           x$SZ5_1_4 %in% 2 &
-           x$SZ5_2_1 %in% 2 &
-           x$SZ5_2_2 %in% 2 &
-           x$SZ5_2_3 %in% 2 &
-           x$SZ5_2_4 %in% 2 &
-           x$SZ5_3_1 %in% 2 &
-           x$SZ5_3_2 %in% 2 &
-           x$SZ5_3_3 %in% 2 &
-           x$SZ5_3_4 %in% 2 &
-           x$SZ5_4_1 %in% 2 &
-           x$SZ5_4_2 %in% 2 &
-           x$SZ5_4_3 %in% 2 &
-           x$SZ5_4_4 %in% 2) * x$waga, na.rm = TRUE),
-       ods_ever = sum(as.numeric(
-         x$SZ5_1_1 %in% 2 &
-           x$SZ5_1_2 %in% 2 &
-           x$SZ5_1_3 %in% 2 &
-           x$SZ5_1_4 %in% 2 &
-           x$SZ5_2_1 %in% 2 &
-           x$SZ5_2_2 %in% 2 &
-           x$SZ5_2_3 %in% 2 &
-           x$SZ5_2_4 %in% 2 &
-           x$SZ5_3_1 %in% 2 &
-           x$SZ5_3_2 %in% 2 &
-           x$SZ5_3_3 %in% 2 &
-           x$SZ5_3_4 %in% 2 &
-           x$SZ5_4_1 %in% 2 &
-           x$SZ5_4_2 %in% 2 &
-           x$SZ5_4_3 %in% 2 &
-           x$SZ5_4_4 %in% 2) * x$waga, na.rm = TRUE) / nka,
+       ods_all = sum(as.numeric(
+         (x$SZ5_1_1 %in% 2 &
+            x$SZ5_1_2 %in% 2 &
+            x$SZ5_1_3 %in% 2 &
+            x$SZ5_1_4 %in% 2) &
+           (x$SZ5_2_1 %in% 2 &
+              x$SZ5_2_2 %in% 2 &
+              x$SZ5_2_3 %in% 2 &
+              x$SZ5_2_4 %in% 2) &
+           (x$SZ5_3_1 %in% 2 &
+              x$SZ5_3_2 %in% 2 &
+              x$SZ5_3_3 %in% 2 &
+              x$SZ5_3_4 %in% 2) &
+           (x$SZ5_4_1 %in% 2 &
+              x$SZ5_4_2 %in% 2 &
+              x$SZ5_4_3 %in% 2 &
+              x$SZ5_4_4 %in% 2) &
+           (x$SZ5_5_1 %in% 2 &
+              x$SZ5_5_2 %in% 2 &
+              x$SZ5_5_3 %in% 2 &
+              x$SZ5_5_4 %in% 2)) * x$waga, na.rm = TRUE) / nka,
        ods_07 = sum(as.numeric(
          x$SZ5_1_1 %in% 2 &
            x$SZ5_2_1 %in% 2 &
            x$SZ5_3_1 %in% 2 &
-           x$SZ5_4_1 %in% 2) * x$waga, na.rm = TRUE) / nka,
+           x$SZ5_4_1 %in% 2 &
+           x$SZ5_5_1 %in% 2) * x$waga, na.rm = TRUE) / nka,
        ods_08 = sum(as.numeric(
          x$SZ5_1_2 %in% 2 &
            x$SZ5_2_2 %in% 2 &
            x$SZ5_3_2 %in% 2 &
-           x$SZ5_4_2 %in% 2) * x$waga, na.rm = TRUE) / nka,
+           x$SZ5_4_2 %in% 2 &
+           x$SZ5_5_2 %in% 2) * x$waga, na.rm = TRUE) / nka,
        ods_09 = sum(as.numeric(
          x$SZ5_1_3 %in% 2 &
            x$SZ5_2_3 %in% 2 &
            x$SZ5_3_3 %in% 2 &
-           x$SZ5_4_3 %in% 2) * x$waga, na.rm = TRUE) / nka,
+           x$SZ5_4_3 %in% 2 &
+           x$SZ5_5_3 %in% 2) * x$waga, na.rm = TRUE) / nka,
        ods_10 = sum(as.numeric(
          x$SZ5_1_4 %in% 2 &
            x$SZ5_2_4 %in% 2 &
            x$SZ5_3_4 %in% 2 &
-           x$SZ5_4_4 %in% 2) * x$waga, na.rm = TRUE) / nka) %>%
+           x$SZ5_4_4 %in% 2 &
+           x$SZ5_5_4 %in% 2) * x$waga, na.rm = TRUE) / nka) %>%
     return()
 }
 #' @title Obliczanie wskaznikow dla R3 F2 na poziomie zagregowanym
 #' @description Funkcja obliczająca i przechowująca informację o sytuacji
 #' edukacyjno-zawodowej absolwentów w \strong{październiku} 2021 roku:
 #' \itemize{
-#'  \item{tylko pracował}{SZ5_1=2 & SZ5_3=1}
-#'  \item{tylko uczył się}{SZ5_1=1 & SZ5_3=2}
-#'  \item{uczył się i pracował}{SZ5_1=1 & SZ5_3=1}
-#'  \item{nie uczył się ani nie pracował}{SZ5_1= & SZ5_3=2}
+#'  \item{tylko pracował}{SZ5_1=2 & (SZ5_2=1 | SZ5_3=1 | SZ5_4=1)}
+#'  \item{tylko uczył się}{SZ5_1=1 & (SZ5_2=2 & SZ5_3=2 & SZ5_4=2)}
+#'  \item{uczył się i pracował}{SZ5_1=1 & (SZ5_2=1 | SZ5_3=1 | SZ5_4=1)}
+#'  \item{nie uczył się ani nie pracował}{SZ5_1= & (SZ5_2=2 & SZ5_3=2 & SZ5_4=2)}
 #' }
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
 #' @export
 status_2021_10 = function(x) {
-  nka = sum(x$SZ5_1_4 %in% c(1:3, 7) |
-              x$SZ5_3_4 %in% c(1:3, 7), na.rm = TRUE)
+  nka = sum(x$SZ5_1_4 %in% c(1:3, 6:9), na.rm = TRUE)
 
   list(n = nka,
-       tylko_praca = sum(x$SZ5_1_4 %in% 2 & x$SZ5_3_4 %in% 1, na.rm = TRUE) / nka,
-       tylko_nauka = sum(x$SZ5_1_4 %in% 1 & x$SZ5_3_4 %in% 2, na.rm = TRUE) / nka,
-       nauka_praca = sum(x$SZ5_1_4 %in% 1 & x$SZ5_3_4 %in% 1, na.rm = TRUE) / nka,
-       brak_nauka_brak_praca = sum(x$SZ5_1_4 %in% 2 & x$SZ5_3_4 %in% 2, na.rm = TRUE) / nka,
-       nie_dotyczy_liczba = sum(x$SZ5_1_4 %in% 3 & x$SZ5_3_4 %in% 3, na.rm = TRUE)
+       tylko_praca = sum(x$SZ5_1_4 != 1 & (x$SZ5_2_4 %in% 1 | x$SZ5_3_4 %in% 1 | x$SZ5_4_4 %in% 1), na.rm = TRUE) / nka,
+       tylko_nauka = sum(x$SZ5_1_4 %in% 1 & (x$SZ5_2_4 != 1 & x$SZ5_3_4 != 1 & x$SZ5_4_4 != 1), na.rm = TRUE) / nka,
+       nauka_praca = sum(x$SZ5_1_4 %in% 1 & (x$SZ5_2_4 %in% 1 | x$SZ5_3_4 %in% 1 | x$SZ5_4_4 %in% 1), na.rm = TRUE) / nka,
+       brak_nauka_brak_praca = sum(x$SZ5_1_4 != 1 & (x$SZ5_2_4 != 1 & x$SZ5_3_4 != 1 & x$SZ5_4_4 != 1), na.rm = TRUE) / nka,
+       nie_dotyczy_liczba = sum(x$SZ5_1_4 %in% 3 & (x$SZ5_2_4 %in% 3 | x$SZ5_3_4 %in% 3 | x$SZ5_4_4 %in% 3), na.rm = TRUE)
   ) %>%
     return()
 }
 #' @title Obliczanie wskaznikow dla R3 F2 na poziomie zagregowanym
-#' @description Funkcja obliczająca i przechowująca \strong{ważoną }informację o
+#' @description Funkcja obliczająca i przechowująca \strong{ważoną} informację o
 #' sytuacji edukacyjno-zawodowej absolwentów w \strong{październiku} 2021 roku:
 #' \itemize{
-#'  \item{tylko pracował}{SZ5_1=2 & SZ5_3=1}
-#'  \item{tylko uczył się}{SZ5_1=1 & SZ5_3=2}
-#'  \item{uczył się i pracował}{SZ5_1=1 & SZ5_3=1}
-#'  \item{nie uczył się ani nie pracował}{SZ5_1= & SZ5_3=2}
+#'  \item{tylko pracował}{SZ5_1=2 & (SZ5_2=1 | SZ5_3=1 | SZ5_4=1)}
+#'  \item{tylko uczył się}{SZ5_1=1 & (SZ5_2=2 & SZ5_3=2 & SZ5_4=2)}
+#'  \item{uczył się i pracował}{SZ5_1=1 & (SZ5_2=1 | SZ5_3=1 | SZ5_4=1)}
+#'  \item{nie uczył się ani nie pracował}{SZ5_1= & (SZ5_2=2 & SZ5_3=2 & SZ5_4=2)}
 #' }
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
 #' @importFrom dplyr %>%
 #' @export
 status_2021_10_WT = function(x) {
-  nka = sum(as.numeric(x$SZ5_1_4 %in% c(1:3, 7) |
-              x$SZ5_3_4 %in% c(1:3, 7)) * x$waga, na.rm = TRUE)
+  nka = sum(as.numeric(x$SZ5_1_4 %in% c(1:3, 6:9)) * x$waga, na.rm = TRUE)
 
   list(n = nka,
-       tylko_praca = sum(as.numeric(x$SZ5_1_4 %in% 2 & x$SZ5_3_4 %in% 1) * x$waga, na.rm = TRUE) / nka,
-       tylko_nauka = sum(as.numeric(x$SZ5_1_4 %in% 1 & x$SZ5_3_4 %in% 2) * x$waga, na.rm = TRUE) / nka,
-       nauka_praca = sum(as.numeric(x$SZ5_1_4 %in% 1 & x$SZ5_3_4 %in% 1) * x$waga, na.rm = TRUE) / nka,
-       brak_nauka_brak_praca = sum(as.numeric(x$SZ5_1_4 %in% 2 & x$SZ5_3_4 %in% 2) * x$waga, na.rm = TRUE) / nka,
-       nie_dotyczy_liczba = sum(as.numeric(x$SZ5_1_4 %in% 3 & x$SZ5_3_4 %in% 3) * x$waga, na.rm = TRUE)
+       tylko_praca = sum(as.numeric(x$SZ5_1_4 != 1 & (x$SZ5_2_4 %in% 1 | x$SZ5_3_4 %in% 1 | x$SZ5_4_4 %in% 1)) * x$waga, na.rm = TRUE) / nka,
+       tylko_nauka = sum(as.numeric(x$SZ5_1_4 %in% 1 & (x$SZ5_2_4 != 1 & x$SZ5_3_4 != 1 & x$SZ5_4_4 != 1)) * x$waga, na.rm = TRUE) / nka,
+       nauka_praca = sum(as.numeric(x$SZ5_1_4 %in% 1 & (x$SZ5_2_4 %in% 1 | x$SZ5_3_4 %in% 1 | x$SZ5_4_4 %in% 1)) * x$waga, na.rm = TRUE) / nka,
+       brak_nauka_brak_praca = sum(as.numeric(x$SZ5_1_4 != 1 & (x$SZ5_2_4 != 1 & x$SZ5_3_4 != 1 & x$SZ5_4_4 != 1)) * x$waga, na.rm = TRUE) / nka,
+       nie_dotyczy_liczba = sum(as.numeric(x$SZ5_1_4 %in% 3 & (x$SZ5_2_4 %in% 3 | x$SZ5_3_4 %in% 3 | x$SZ5_4_4 %in% 3)) * x$waga, na.rm = TRUE)
   ) %>%
     return()
 }
@@ -496,6 +509,7 @@ status_2021_10_WT = function(x) {
 #'  \item{Kwalifikacyjny Kurs Zawodowy}
 #'  \item{Dowonla forma}
 #'  \item{Dowonla forma - BS1}
+#'  \item{Dowonla forma - Technikum}
 #' }
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
@@ -520,7 +534,11 @@ eduk_kontyn = function(x) {
                   x$KN1_6 %in% 1, na.rm = TRUE) / nka,
       any_bs1 = sum(x$KN1_1 %in% 1 |
                       x$KN1_2 %in% 1 |
-                      x$KN1_6 %in% 1, na.rm = TRUE) / nka) %>%
+                      x$KN1_6 %in% 1, na.rm = TRUE) / nka,
+      any_tech = sum(x$KN1_3 %in% 1 |
+                       x$KN1_4 %in% 1 |
+                       x$KN1_5 %in% 1 |
+                       x$KN1_6 %in% 1, na.rm = TRUE) / nka) %>%
    return()
 }
 #' @title Obliczanie wskaznikow dla R3 F2 na poziomie zagregowanym
@@ -537,6 +555,7 @@ eduk_kontyn = function(x) {
 #'  \item{Kwalifikacyjny Kurs Zawodowy}
 #'  \item{Dowonla forma}
 #'  \item{Dowonla forma - BS1}
+#'  \item{Dowonla forma - Technikum}
 #' }
 #' @param x ramka danych ze wskaźnikami na poziomie indywidualnym
 #' @return lista
@@ -561,7 +580,11 @@ eduk_kontyn_WT = function(x) {
                               x$KN1_6 %in% 1) * x$waga, na.rm = TRUE) / nka,
        any_bs1 = sum(as.numeric(x$KN1_1 %in% 1 |
                                   x$KN1_2 %in% 1 |
-                                  x$KN1_6 %in% 1) * x$waga, na.rm = TRUE) / nka) %>%
+                                  x$KN1_6 %in% 1) * x$waga, na.rm = TRUE) / nka,
+       any_tech = sum(as.numeric(x$KN1_3 %in% 1 |
+                                   x$KN1_4 %in% 1 |
+                                   x$KN1_5 %in% 1 |
+                                   x$KN1_6 %in% 1) * x$waga, na.rm = TRUE) / nka) %>%
     return()
 }
 #' @title Obliczanie wskaznikow dla R3 F2 na poziomie zagregowanym
